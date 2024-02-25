@@ -1,5 +1,9 @@
 name: sync_code_to_GDrive
-on: push
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   syncjob:
     runs-on: ubuntu-latest
