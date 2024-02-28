@@ -6,7 +6,9 @@ The goal of this project is to enhance the model's accuracy and regularization c
 
 ## Strategy
 
-To achieve our aim, we have implemented Dropout and Batch Normalization after activation functions (specifically ReLU) within the convolutional layers of our model. Dropout is strategically added either after an activation function or a pooling layer. It serves to mitigate overfitting by randomly nullifying input units during training, with a predefined probability (e.g., 0.25 or 0.5). Batch Normalization, on the other hand, is applied subsequent to the convolutional layers but prior to the activation function. This technique aids in stabilizing the learning process by normalizing the output of the preceding layer.
+To achieve our aim, we have implemented Dropout, Batch Normalization and fully connected layer after activation functions (specifically ReLU) within the convolutional layers of our model. Dropout is strategically added either after an activation function or a pooling layer. It serves to mitigate overfitting by randomly nullifying input units during training, with a predefined probability. Batch Normalization, on the other hand, is applied subsequent to the convolutional layers but prior to the activation function. This technique aids in stabilizing the learning process by normalizing the output of the preceding layer.
+
+Besides, we need to significantly reduce the complexity of the model. This involves using fewer filters in the convolutional layers and simplifying the network structure.
 
 ## Code Revisions
 
@@ -18,12 +20,14 @@ To achieve our aim, we have implemented Dropout and Batch Normalization after ac
 
 - **Removal of ReLU Activation from the Last Layer:** To ensure the output layer's effectiveness in classification tasks, the ReLU activation function has been omitted from the final layer.
 
+- **Simplify Model Structure:**  This model structure significantly reduces the number of parameters by decreasing the number of filters in each convolutional layer
+
 ## Achievements
 
   - [x] Successful integration of both Batch Normalization and Dropout techniques.
   - [x] The model operates with much less than 20K parameters.
   - [x] Achieved the desired accuracy in fewer than 20 epochs.
-  - [x] Attained a peak validation accuracy of 99.61%.
+  - [x] Attained a peak validation accuracy of 99.41%.
 
 
 
