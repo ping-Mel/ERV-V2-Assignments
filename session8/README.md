@@ -10,17 +10,21 @@ The base model, referred to as **NetA** for **BN**, **NetB** for the **LN** vari
 ## Normalization Techniques and Findings
 
 ### Batch Normalization (BN) Network Analysis
-Achievement: The BN model successfully achieved over 70% accuracy on CIFAR10, demonstrating the effectiveness of BN in enhancing training stability and model generalization.
-Key Insight: BN proved crucial for maintaining high performance without necessitating data augmentation, highlighting its role in efficient neural network design within the parameter constraints.
+**Achievement:** The BN model successfully achieved over 70% accuracy on CIFAR10, demonstrating the effectiveness of BN in enhancing training stability and model generalization.
+
+**Key Insight:** BN proved crucial for maintaining high performance without necessitating data augmentation, highlighting its role in efficient neural network design within the parameter constraints.
 
 ### Layer Normalization (LN) Network Analysis
 
-Challenges: The LN model presented tuning challenges, especially regarding model channels and learning rate adjustments, reflecting LN's sensitivity to hyperparameter configurations.
-Outcome: Despite edging the 50k parameter limit, the LN model achieved the target accuracy, emphasizing the nuanced balance between model complexity and performance when using LN.
+**Challenges:** The LN model presented tuning challenges, especially regarding model channels and learning rate adjustments, reflecting LN's sensitivity to hyperparameter configurations.
+
+**Outcome:** Despite edging the 50k parameter limit, the LN model achieved the target accuracy, emphasizing the nuanced balance between model complexity and performance when using LN.
 
 ### Group Normalization (GN) Network Analysis
-Efficiency: Incorporating GN resulted in a straightforward achievement of both the parameter limit and desired accuracy, underlining GN's robustness and efficiency in model normalization.
-Advantages: GN significantly contributed to model performance without increasing architectural complexity, showcasing its potential in lean yet effective model design.
+
+**Efficiency: **Incorporating GN resulted in a straightforward achievement of both the parameter limit and desired accuracy, underlining GN's robustness and efficiency in model normalization.
+
+**Advantages:** GN significantly contributed to model performance without increasing architectural complexity, showcasing its potential in lean yet effective model design.
 
 ## Misclassified Images Analysis
 
