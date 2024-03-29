@@ -420,3 +420,66 @@ class Models:
             # Flatten for the final output
             x = x.view(x.size(0), -1)
             return F.log_softmax(x, dim=-1)
+
+
+    class NetD(nn.Module):
+        """
+        Inner class representing an initial neural network architecture.
+        """
+        def __init__(self):
+            super(Models.NetD, self).__init__()
+
+            # Convolutional layers
+            #R_in, N_in, j_in, S, R_out, N_out, J_out, P, K
+            # 1     32     1   2    3      15     2    0  3
+            self.convblock1 = nn.Sequential(
+              nn.Conv2d(in_channels = 3, out_channels = 256, kernel_size = 3, stride=2, padding=0),
+              nn.ReLU(),
+              nn.Dropout(0.2)
+            )
+
+            #R_in, N_in, j_in, S, R_out, N_out, J_out, P, K
+            # 3     15    2    2    7      7     4     0   3
+            self.convblock2 = nn.Sequential(
+              nn.Conv2d(in_channels = 256, out_channels = 128, kernel_size = 3, stride=2, padding=0, groups = 128),
+              nn.ReLU(),
+              nn.Dropout(0.2),
+
+               # Pointwise convolution: expanding the number of channels
+              nn.Conv2d(128, 128, kernel_size=1),  # Increase the channel depth from 32 to 128
+              nn.ReLU(),
+              nn.Dropout(0.1)
+
+            )
+            #R_in, N_in, j_in, S, R_out, N_out, J_out, P, K
+            # 7     7     4    2    31     3     8,    1  3
+            self.convblock3 = nn.Sequential(
+              nn.Conv2d(in_channels = 128, out_channels = 64, kernel_size = 3,  stride=2, padding=3, dilation= 3),
+              nn.ReLU(),
+              nn.Dropout(0.1)
+            )
+
+            #R_in, N_in, j_in, S, R_out, N_out, J_out, P, K
+            # 31    3     8    1    47     1      8    0, 3
+            self.convblock4 = nn.Sequential(
+              #nn.Conv2d(64, 16, 3,stride=1, padding=0)
+              nn.Conv2d(in_channels=64, out_channels=16, kernel_size=3, stride=2, padding=2, dilation=2),
+              nn.ReLU(),
+              nn.Dropout(0.1)
+            )
+
+
+            self.global_avg_pool = nn.AdaptiveAvgPool2d((1,1))  # Global pooling to reduce parameters
+
+            self.fc = nn.Linear(16, 10)
+
+        def forward(self, x):
+            x = self.convblock1(x)
+            x = self.convblock2(x)
+            x = self.convblock3(x)  # 1x1 conv
+            x = self.convblock4(x)
+
+            x = self.global_avg_pool(x)
+            x = x.view(x.size(0), -1)  # Correct reshaping for batch size
+            x = self.fc(x)
+            return F.log_softmax(x, dim=-1)
